@@ -6,11 +6,13 @@ FILENAME = "broadcast.json"
 
 
 def write_to_file(config):
+    """Writes config string to FILENAME.json in current working directory"""
     with open(FILENAME, 'wb') as f:
         f.write(config)
 
 
 def gen_tty(i):
+    """Generates the configuration of the i-th tty agent"""
     pid = i*10
     res = []
     res.append("\t{}: {{".format(pid))
@@ -26,6 +28,7 @@ def gen_tty(i):
 
 
 def gen_id(i):
+    """Generates the configuration of the i-th id agent"""
     pid = i*10+1
     res = []
     res.append("\t{}: {{".format(pid))
@@ -44,6 +47,7 @@ def gen_id(i):
 
 
 def gen_broadcast(i, clusters):
+    """Generates the configuration of the i-th broadcast agent"""
     pid = i*10+2
     res = []
     clients = [str(c*10) for c in clusters if c != i]
@@ -63,8 +67,9 @@ def gen_broadcast(i, clusters):
     return "\n".join(res)
 
 
-
 def main(numClients):
+    """Generates the configuration for a broadcast network with 
+    numClients clients"""
     clusters = range(1, numClients+1)
     res = ['{']
     for i in clusters:
@@ -72,7 +77,7 @@ def main(numClients):
         res.append(gen_id(i))
         res.append(gen_broadcast(i, clusters))
     res.append('}')
-    config = "\n".join(res)
+    config = "\n\n".join(res)
     write_to_file(config)
 
 
