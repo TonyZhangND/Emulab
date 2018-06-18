@@ -19,7 +19,7 @@ def main():
         while l:
             if "node" in l:  #ignore localhost, for instance
                 ip = l.split('\t', 1)[0]
-                res.append("\t@node{}: {}".format(i, ip))
+                res.append("\tnode{}: {}".format(i, ip))
                 i += 1
             l = f.readline()
     res.append('}')
