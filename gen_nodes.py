@@ -10,7 +10,7 @@ def write_to_file(nodes):
         f.write(nodes)
 
 
-def main(numClients):
+def main():
     """Generates the nodes.json file for the current experiment network"""
     res = ['{']
     i = 0
@@ -18,7 +18,7 @@ def main(numClients):
         l = f.readline()
         while l:
             if "node" in l:  #ignore localhost, for instance
-                ip = l.split(1)[0]
+                ip = l.split('\t', 1)[0]
                 res.append("\t@node{}: {}".format(i, ip))
                 i += 1
             l = f.readline()
